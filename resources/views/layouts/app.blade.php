@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;500&display=swap" rel="stylesheet">
     @yield('css')
     @livewireStyles
 </head>
@@ -27,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="background-color:#5596cd!important;position:fixed;width:100%;z-index:10000">
             <div class="container">
                 <a class="navbar-brand text-light" href="{{ url('/') }}">
-                <i class="fas fa-user-tie logo"></i> SYRIAN-JOBS
+                <i class="fas fa-user-tie logo"></i> WAZIFNE.com
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,24 +38,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                   
-                 
-      
+
+
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="{{ route('register') }}">إنشاء حساب </a>
+                                </li>
+                            @endif
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link text-light" href="{{ route('login') }}">تسجيل الدخول </a>
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item">
                                 <livewire:notification-counter></livewire:notification-counter>
@@ -62,18 +65,18 @@
                                     {{ Auth::user()->fname }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/profile/{{Auth::id()}}"><i class="fas fa-user-circle"></i> Profile</a>
-                                    <a class="dropdown-item" href="/company/{{Auth::id()}}"><i class="fas fa-building"></i></i> My Company</a>
-                                    <a class="dropdown-item" href='/add-job'><i class="fas fa-user-tie"></i></i> Add New Job</a>
-                                    <a class="dropdown-item" href='/saved-posts '><i class="fas fa-bookmark"></i></i> Saved Jobs</a>
-                                    <a class="dropdown-item" href='/my-presents'><i class="fas fa-cog"></i> My Presents</a>
-                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fas fa-flag"></i> Report Problem</button>
+                                <div class="dropdown-menu dropdown-menu-right text-right" aria-labelledby="navbarDropdown" >
+                                    <a class="dropdown-item" href="/profile/{{Auth::id()}}"> الملف الشخصي <i class="fas fa-user-circle"></i>  </a>
+                                    <a class="dropdown-item" href="/company/{{Auth::id()}}"> شركتي <i class="fas fa-building"></i></i></a>
+                                    <a class="dropdown-item" href='/add-job'> إضافة وظيفة جديد <i class="fas fa-user-tie"></i></i></a>
+                                    <a class="dropdown-item" href='/saved-posts '> الوظائف المحفوظة <i class="fas fa-bookmark"></i></i></a>
+                                    <a class="dropdown-item" href='/my-presents'> الوظائف المقدمة <i class="fas fa-cog"></i></a>
+                                    <button class="dropdown-item text-right" data-bs-toggle="modal" data-bs-target="#reportModal"> إبلاغ عن مشكلة <i class="fas fa-flag"></i></button>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                     <i class="fas fa-sign-out-alt"></i> 
-                                        {{ __('Logout') }}
+                            تسجيل الخروج
+                                        <i class="fas fa-sign-out-alt"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -115,8 +118,11 @@
                 </div>
             </div>
         </main>
+        <footer class="bg-primary py-2 d-flex flex-column align-items-center"   >
+            <p class="text-white"> &copy; جميع الحقوق محفوظة </p>
+        </footer>
     </div>
-    
+
     @livewireScripts
         <script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>

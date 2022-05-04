@@ -15,7 +15,7 @@
                                         <p class="ml-5  mt-5"><i class="fas fa-building text-primary"></i> {{$myCompany->name}}</p>
                                         <p class="ml-5  mt-1"><i class="fas fa-map-marker-alt text-primary"></i> {{$myCompany->address}}</p>
                                 </div>
-                               
+
                         </div>
                         <div class="col-md-6 bg-white">
                                 <div>
@@ -23,7 +23,7 @@
                                         <p>
                                                 {{$myCompany->description}}
                                         </p>
-                                </div>   
+                                </div>
                         </div>
         </div>
         <div class="row">
@@ -44,41 +44,43 @@
         </div>
 
 <!-- Edit Company Modals -->
+        @if(Auth::check())
         @if(Auth::user()->myCompany != null)
-        <div wire:ignore.self class="modal fade mt-5" id="editCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div wire:ignore.self class="modal fade mt-5" id="editCompanyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                    <div class="modal-content">
                         <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Update Company</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Company</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                                </button>
+                            </button>
                         </div>
                         <div class="modal-body">
-                                <div class="row">
-                                        <div class="col-md-12 mb-2">
-                                                <label for="name">Name</label>
-                                                <input type="text" id="name" wire:model="uName" class="form-control"  placeholder="Enter Company Name">
-                                                @error('uName') <span class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                                <label for="description">Description</label>
-                                                <textarea id="description" wire:model="uDescription" class="form-control" placeholder="Enter Company Description"></textarea>
-                                                @error('uDescription') <span class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                        <div class="col-md-12 mb-2">
-                                                <label for="address">Address</label>
-                                                <input type="text" id="address" wire:model="uAddress" class="form-control" placeholder="Enter Company Address">
-                                                @error('uAddress') <span class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                        <div class="col-md-12 mt-3">
-                                                <button wire:click="updateCompany" class="btn btn-primary pl-5 pr-5">Update</button>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" wire:model="uName" class="form-control"  placeholder="Enter Company Name">
+                                    @error('uName') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" wire:model="uDescription" class="form-control" placeholder="Enter Company Description"></textarea>
+                                    @error('uDescription') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" wire:model="uAddress" class="form-control" placeholder="Enter Company Address">
+                                    @error('uAddress') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <button wire:click="updateCompany" class="btn btn-primary pl-5 pr-5">Update</button>
+                                </div>
+                            </div>
                         </div>
-                        </div>
+                    </div>
                 </div>
-        </div>
+            </div>
+    @endif
         @endif
 <!-- Modals -->
 

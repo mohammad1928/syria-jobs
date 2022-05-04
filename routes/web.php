@@ -18,23 +18,26 @@ use App\Models\User;
 
 Auth::routes();
 
-Route::group(['middleware'=>'auth'],function(){
+Route::get('/home-page',function(){
+    return view('home-page');
+});
 
-    Route::get('/',function(){
-        return view('home');
-    });
-    Route::get('/test',function(){
-        return Auth::user()->praSkills;
-    });
-    Route::get('/company/{id}',function($id){
-     
-        return view('company',compact("id"));
-    });
+Route::get('/',function(){
+    return view('home');
+});
+
+Route::get('/profile/{id}',function($id){
+    return view('profile',compact("id"));
+});
+
+Route::get('/company/{id}',function($id){
+
+    return view('company',compact("id"));
+});
+
+Route::group(['middleware'=>'auth'],function(){
     Route::get('/add-job',function(){
         return view('add-job');
-    });
-    Route::get('/profile/{id}',function($id){
-        return view('profile',compact("id"));
     });
 
     Route::get('/saved-posts',function(){
@@ -48,13 +51,11 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/notifications',function(){
         return view('notifications');
     });
-    
+
     Route::post('report',[App\Http\Controllers\HomeController::class,'report']);
 });
 
-Route::get('/testApi',function(){
-    return view('testapi');
-});
+
 //Admin Routes
 Route::group(['middleware'=>'admin'],function(){
 
@@ -77,8 +78,6 @@ Route::group(['middleware'=>'admin'],function(){
     Route::get('/dashboard/reports',function(){
         return view('admin.manage-reports')->with(['word'=>'reports']);
     });
-
-   
 });
 
 
@@ -136,7 +135,7 @@ Route::get('/auth/github/callback', function () {
             'password'=>encrypt('19372915463'),
         ]);
         Auth::login($newUser);
-        
+
     }
     return redirect('/');
 

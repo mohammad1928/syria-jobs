@@ -33,7 +33,6 @@ class CompanyComponent extends Component
             $this->emitTo('post-component','postsUpdated');
         }
         return view('livewire.company-component',compact('myCompany'));
-     
     }
     public function createCompany(){
         $this->validate([
